@@ -1,0 +1,63 @@
+
+/* universal selector */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    /* this is define what 1rem 
+    1rem = 16px
+    16 px --- 100%
+    10px = 100/16 = 62.5%
+
+    62.5 % = 10px = 1rem in entire project
+    */
+    font-size: 62.5%; // 1rem = 10px,  10/16 = 62.5 %
+
+    /* we can de but instead of this we can use mixins and with @content
+    @media (max-width: 600px) {
+        font-size: 50%;
+    }
+    */
+
+    /* some othewr better way
+    @include respond-phone {
+        font-size: 50%;
+    }
+    */
+
+    @include respond(tab-land) { // width < 1200
+        font-size: 56.25%; // 1rem = 9 px, 9/16 = 56.25%
+    }
+
+    @include respond(tab-port) { // width < 900
+        font-size: 50%; // 1rem = 8 px, 8/16 = 50%
+    }
+
+    /*
+    @include respond(phone) { // width < 600
+        font-size: 37.5%; // 1rem = 6 px, 6/16 = 37.5%
+    }
+    */
+    @include respond(big-desktop) { // width > 1800
+        font-size: 75%; // 1rem = 12 px, 12/16 = 75%
+    }
+}
+
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond(tab-port) { // width < 900
+        padding: 0; // 1rem = 8 px, 8/16 = 50%
+    }
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
